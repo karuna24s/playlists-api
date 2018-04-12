@@ -16,6 +16,15 @@ module Api::V1
       render json: @playlist
     end
 
+    def destroy
+      @playlist = Playlist.find(params[:id])
+      if @playlist.destroy
+        head :no_content, status: :ok
+      else
+        render json: @playlist.errors, status: :unprocessable_entity
+      end
+    end
+
 
     private
 
